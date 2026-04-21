@@ -1,16 +1,10 @@
-/* RESET */
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: #0f172a;
+  background: #54607d;
   color: white;
 }
 
-/* LAYOUT */
 .container {
   display: flex;
   height: 100vh;
@@ -20,37 +14,38 @@ body {
 .left-panel {
   width: 320px;
   padding: 20px;
-  background: #111827;
+  background: #6377a0;
   display: flex;
   flex-direction: column;
   gap: 15px;
   border-right: 1px solid rgba(255,255,255,0.1);
 }
 
-/* INPUTS */
+.left-panel h2 {
+  margin-bottom: 10px;
+}
+
 input, select {
-  padding: 12px;
-  border-radius: 10px;
+  padding: 10px;
+  border-radius: 8px;
   border: none;
   background: #1f2937;
   color: white;
-  font-size: 16px;
 }
 
-/* BUTTONS */
 button {
-  padding: 14px;
-  border-radius: 12px;
+  padding: 12px;
+  border-radius: 10px;
   border: none;
   background: linear-gradient(135deg, #2563eb, #3b82f6);
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
-button:active {
-  transform: scale(0.97);
+button:hover {
+  transform: scale(1.05);
 }
 
 /* RIGHT PANEL */
@@ -59,35 +54,22 @@ button:active {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
 }
 
 canvas {
-  width: 100%;
-  height: auto;
-  max-height: 90vh;
+  max-width: 90%;
+  max-height: 90%;
   border-radius: 20px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 10px 40px rgba(70, 70, 70, 0.6);
 }
 
-/* 🔥 MOBILE FIX */
+/* MOBILE */
 @media(max-width: 768px) {
   .container {
     flex-direction: column;
-    height: auto;
   }
 
   .left-panel {
     width: 100%;
-    border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .right-panel {
-    padding: 10px;
-  }
-
-  canvas {
-    max-height: 60vh;
   }
 }

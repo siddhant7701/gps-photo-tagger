@@ -1,13 +1,9 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
 const logo = new Image();
-logo.src = "logo.jpeg";
-
+logo.src = "logo.jpeg"; // your logo file
 let uploadedImage = null;
-let originalFileName = "download.png";
 
-// 📍 Locations
 const locations = [
   {
     name: "Chainpur Location",
@@ -25,33 +21,31 @@ const locations = [
   }
 ];
 
-// Dropdown
+// Load dropdown
 const select = document.getElementById("locationSelect");
 locations.forEach((loc, i) => {
-  const option = document.createElement("option");
+  let option = document.createElement("option");
   option.value = i;
   option.text = loc.name;
   select.appendChild(option);
 });
 
 // Upload Image
-document.getElementById("upload").addEventListener("change", function (e) {
+document.getElementById("upload").addEventListener("change", function(e) {
   const file = e.target.files[0];
-  if (!file) return;
-
-  originalFileName = file.name;
-
   const reader = new FileReader();
-  reader.onload = function (event) {
+
+  reader.onload = function(event) {
     uploadedImage = new Image();
     uploadedImage.src = event.target.result;
 
-    uploadedImage.onload = function () {
+    uploadedImage.onload = function() {
       canvas.width = uploadedImage.width;
       canvas.height = uploadedImage.height;
       ctx.drawImage(uploadedImage, 0, 0);
     };
   };
+
   reader.readAsDataURL(file);
 });
 
@@ -68,98 +62,81 @@ function generateImage() {
   const time = now.toLocaleTimeString();
   const gmt = now.toUTCString().split(" ")[4];
 
-  // 🔥 Dynamic overlay
-  const boxHeight = canvas.height * 0.25;
-
+  // Bottom Overlay
+  const boxHeight = 180;
   ctx.fillStyle = "rgba(0,0,0,0.65)";
   ctx.fillRect(0, canvas.height - boxHeight, canvas.width, boxHeight);
-
-  const fontLarge = Math.floor(canvas.width * 0.035);
-  const fontSmall = Math.floor(canvas.width * 0.025);
 
   ctx.fillStyle = "white";
 
   // Address
-  ctx.font = `bold ${fontLarge}px Arial`;
+  ctx.font = "bold 24px Arial";
   ctx.textAlign = "center";
-  ctx.fillText(loc.address, canvas.width / 2, canvas.height - boxHeight + 40);
+  ctx.fillText(loc.address, canvas.width / 2, canvas.height - 150);
 
   // Left
   ctx.textAlign = "left";
-  ctx.font = `${fontSmall}px Arial`;
+  ctx.font = "20px Arial";
 
-  ctx.fillText("Latitude", 20, canvas.height - boxHeight + 80);
-  ctx.fillText(loc.lat, 20, canvas.height - boxHeight + 110);
+  ctx.fillText("Latitude", 20, canvas.height - 110);
+  ctx.fillText(loc.lat, 20, canvas.height - 85);
 
-  ctx.fillText("Local " + time, 20, canvas.height - boxHeight + 140);
-  ctx.fillText("GMT " + gmt, 20, canvas.height - boxHeight + 170);
+  ctx.fillText("Local " + time, 20, canvas.height - 55);
+  ctx.fillText("GMT " + gmt, 20, canvas.height - 30);
 
   // Right
-  const rightX = canvas.width - 260;
+  ctx.fillText("Longitude", canvas.width - 260, canvas.height - 110);
+  ctx.fillText(loc.lng, canvas.width - 260, canvas.height - 85);
 
-  ctx.fillText("Longitude", rightX, canvas.height - boxHeight + 80);
-  ctx.fillText(loc.lng, rightX, canvas.height - boxHeight + 110);
+  ctx.fillText("Altitude " + loc.altitude, canvas.width - 260, canvas.height - 55);
+  ctx.fillText(date, canvas.width - 260, canvas.height - 30);
 
-  ctx.fillText("Altitude " + loc.altitude, rightX, canvas.height - boxHeight + 140);
-  ctx.fillText(date, rightX, canvas.height - boxHeight + 170);
+  // LOGO + TEXT (BOTTOM RIGHT LIKE REAL APP)
+// 🔥 PREMIUM LOGO CARD (FIXED VERSION)
 
-  // 🔥 LOGO (Responsive + Clean)
-  const logoSize = canvas.width * 0.12;
+const logoWidth = 80;
+const logoHeight = 80;
 
-  const x = canvas.width - logoSize - 20;
-  const y = canvas.height - boxHeight - logoSize - 20;
+// Position ABOVE overlay (important fix)
+const x = canvas.width - logoWidth - 30;
+const y = canvas.height - boxHeight - logoHeight - 30;
 
-  // Card background
-  ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-  ctx.beginPath();
-  ctx.roundRect(x - 10, y - 10, logoSize + 20, logoSize + 50, 15);
-  ctx.fill();
+// Card background (glass effect)
+ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
+ctx.beginPath();
+ctx.roundRect(x - 15, y - 15, logoWidth + 30, logoHeight + 65, 15);
+ctx.fill();
 
-  // Border
-  ctx.strokeStyle = "rgba(255,255,255,0.2)";
-  ctx.stroke();
+// Optional border (makes it pop)
+ctx.strokeStyle = "rgba(255,255,255,0.2)";
+ctx.stroke();
 
-  // Shadow
-  ctx.shadowColor = "rgba(0,0,0,0.5)";
-  ctx.shadowBlur = 10;
-  ctx.shadowOffsetY = 4;
+// Shadow for depth
+ctx.shadowColor = "rgba(0,0,0,0.5)";
+ctx.shadowBlur = 10;
+ctx.shadowOffsetY = 4;
 
-  // Logo
-  ctx.drawImage(logo, x, y, logoSize, logoSize);
+// Draw logo
+ctx.drawImage(logo, x, y, logoWidth, logoHeight);
 
-  // Reset shadow
-  ctx.shadowColor = "transparent";
+// Reset shadow (IMPORTANT)
+ctx.shadowColor = "transparent";
 
-  // Text
-  ctx.fillStyle = "white";
-  ctx.textAlign = "center";
+// Text below logo
+ctx.fillStyle = "white";
+ctx.textAlign = "center";
 
-  ctx.font = `${fontSmall}px Arial`;
-  ctx.fillText("GPS Map", x + logoSize / 2, y + logoSize + 20);
-  ctx.fillText("Camera", x + logoSize / 2, y + logoSize + 40);
+ctx.font = "bold 14px Arial";
+ctx.fillText("GPS Map", x + logoWidth / 2, y + logoHeight + 20);
+
+ctx.font = "12px Arial";
+ctx.fillText("Camera", x + logoWidth / 2, y + logoHeight + 40);
 }
 
-// Download (original filename)
+// Download
 function downloadImage() {
   const link = document.createElement("a");
-  link.download = originalFileName;
-  link.href = canvas.toDataURL("image/png", 1.0);
+  link.download = "geo-tagged.png";
+  link.href = canvas.toDataURL();
   link.click();
-}
-
-// ✅ Fix for roundRect (if not supported)
-if (!CanvasRenderingContext2D.prototype.roundRect) {
-  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
-    this.beginPath();
-    this.moveTo(x + r, y);
-    this.lineTo(x + w - r, y);
-    this.quadraticCurveTo(x + w, y, x + w, y + r);
-    this.lineTo(x + w, y + h - r);
-    this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    this.lineTo(x + r, y + h);
-    this.quadraticCurveTo(x, y + h, x, y + h - r);
-    this.lineTo(x, y + r);
-    this.quadraticCurveTo(x, y, x + r, y);
-    this.closePath();
-  };
 }
