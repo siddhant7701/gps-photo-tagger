@@ -63,7 +63,7 @@ function generateImage() {
   const gmt = now.toUTCString().split(" ")[4];
 
   // Bottom Overlay
-  const boxHeight = 180;
+  const boxHeight = 200;
   ctx.fillStyle = "rgba(0,0,0,0.65)";
   ctx.fillRect(0, canvas.height - boxHeight, canvas.width, boxHeight);
 
@@ -92,45 +92,37 @@ function generateImage() {
   ctx.fillText(date, canvas.width - 260, canvas.height - 30);
 
   // LOGO + TEXT (BOTTOM RIGHT LIKE REAL APP)
-// 🔥 PREMIUM LOGO CARD (FIXED VERSION)
-
 const logoWidth = 80;
 const logoHeight = 80;
 
-// Position ABOVE overlay (important fix)
-const x = canvas.width - logoWidth - 30;
-const y = canvas.height - boxHeight - logoHeight - 30;
+const x = canvas.width - logoWidth - 20;
+const y = canvas.height - boxHeight - logoHeight - 20;
 
-// Card background (glass effect)
-ctx.fillStyle = "rgba(0, 0, 0, 0.45)";
-ctx.beginPath();
-ctx.roundRect(x - 15, y - 15, logoWidth + 30, logoHeight + 65, 15);
-ctx.fill();
-
-// Optional border (makes it pop)
-ctx.strokeStyle = "rgba(255,255,255,0.2)";
-ctx.stroke();
-
-// Shadow for depth
-ctx.shadowColor = "rgba(0,0,0,0.5)";
-ctx.shadowBlur = 10;
-ctx.shadowOffsetY = 4;
+// Background (glass style)
+ctx.fillStyle = "rgba(0,0,0,0.6)";
+ctx.fillRect(x - 10, y - 10, logoWidth + 20, logoHeight + 50);
 
 // Draw logo
 ctx.drawImage(logo, x, y, logoWidth, logoHeight);
 
-// Reset shadow (IMPORTANT)
-ctx.shadowColor = "transparent";
-
 // Text below logo
 ctx.fillStyle = "white";
+ctx.font = "bold 16px Arial";
 ctx.textAlign = "center";
 
-ctx.font = "bold 14px Arial";
-ctx.fillText("GPS Map", x + logoWidth / 2, y + logoHeight + 20);
+ctx.fillText(
+  "GPS Map",
+  x + logoWidth / 2,
+  y + logoHeight + 20
+);
 
-ctx.font = "12px Arial";
-ctx.fillText("Camera", x + logoWidth / 2, y + logoHeight + 40);
+ctx.font = "14px Arial";
+
+ctx.fillText(
+  "Camera",
+  x + logoWidth / 2,
+  y + logoHeight + 40
+);
 }
 
 // Download

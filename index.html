@@ -24,11 +24,17 @@
 
   <!-- 🔥 CONTROL PANEL -->
   <div class="left-panel">
+<div class="card">
+  <label>Upload Image</label>
 
-    <div class="card">
-      <label>Upload Image</label>
-      <input type="file" id="upload" accept="image/*">
-    </div>
+  <label class="upload-box">
+    <input type="file" id="upload" accept="image/*" hidden>
+    <span id="uploadText">📁 Choose Image</span>
+  </label>
+
+  <!-- 🔥 PREVIEW -->
+  <img id="previewImage" />
+</div>
 
     <div class="card">
       <label>Select Location</label>
