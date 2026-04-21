@@ -70,13 +70,13 @@ function generateImage() {
   ctx.fillStyle = "white";
 
   // Address
-  ctx.font = "bold 24px Arial";
+  ctx.font = "bold 40px Arial";
   ctx.textAlign = "center";
   ctx.fillText(loc.address, canvas.width / 2, canvas.height - 150);
 
   // Left
   ctx.textAlign = "left";
-  ctx.font = "20px Arial";
+  ctx.font = "28px Arial";
 
   ctx.fillText("Latitude", 20, canvas.height - 110);
   ctx.fillText(loc.lat, 20, canvas.height - 85);
@@ -98,14 +98,11 @@ const logoHeight = 80;
 const x = canvas.width - logoWidth - 20;
 const y = canvas.height - boxHeight - logoHeight - 20;
 
-// Background (glass style)
 ctx.fillStyle = "rgba(0,0,0,0.6)";
 ctx.fillRect(x - 10, y - 10, logoWidth + 20, logoHeight + 50);
 
-// Draw logo
 ctx.drawImage(logo, x, y, logoWidth, logoHeight);
 
-// Text below logo
 ctx.fillStyle = "white";
 ctx.font = "bold 16px Arial";
 ctx.textAlign = "center";
@@ -125,7 +122,6 @@ ctx.fillText(
 );
 }
 
-// Download
 function downloadImage() {
   const link = document.createElement("a");
   link.download = "geo-tagged.png";
