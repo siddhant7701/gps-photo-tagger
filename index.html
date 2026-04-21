@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GPS Photo Tagger</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="left-panel">
+    <h2>📍 GPS Photo Tagger</h2>
+
+    <label>Upload Image</label>
+    <input type="file" id="upload" accept="image/*">
+
+    <label>Select Location</label>
+    <select id="locationSelect"></select>
+
+    <button onclick="generateImage()">Generate Image</button>
+    <button onclick="downloadImage()">Download</button>
+  </div>
+
+  <div class="right-panel">
+    <canvas id="canvas"></canvas>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
