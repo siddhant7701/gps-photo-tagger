@@ -70,13 +70,13 @@ function generateImage() {
   ctx.fillStyle = "white";
 
   // Address
-  ctx.font = "bold 40px Arial";
+  ctx.font = "bold 24px Arial";
   ctx.textAlign = "center";
   ctx.fillText(loc.address, canvas.width / 2, canvas.height - 150);
 
   // Left
   ctx.textAlign = "left";
-  ctx.font = "28px Arial";
+  ctx.font = "20px Arial";
 
   ctx.fillText("Latitude", 20, canvas.height - 110);
   ctx.fillText(loc.lat, 20, canvas.height - 85);
